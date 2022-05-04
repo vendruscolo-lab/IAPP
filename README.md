@@ -8,4 +8,4 @@ PRODUCTION_TPR contaitns the folders containing the .tpr files of each replica. 
 ANALYSIS folder contains the plumed_analysis.dat file used to print the CVs of the biased N-tail side as well as the final torrie-value weight per-frame.
 plumed_analysis_unbiased.dat is used to print the unbiased N-tail side CVs. 
 
-An sample sample of the ensemble can be found in Zenobo
+Samples  of the ensemble without protein-hydrogens or water/ions can be found in Zenobo https://zenodo.org/record/6518554#.YnLwby8Rqhw
