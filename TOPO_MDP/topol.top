@@ -1,0 +1,77 @@
+;
+;	File 'topol.top' was generated
+;	By user: fb516 (12413)
+;	On host: esPP002
+;	At date: Sat Jul  4 04:27:40 2020
+;
+;	This is a standalone topology file
+;
+;	Created by:
+;	           :-) GROMACS - gmx pdb2gmx, 2018.6 (double precision) (-:
+;	
+;	Executable:   /work/e658/e658/fb516/SOFTWARE/new/gromacs-2018.6/bin/gmx_d
+;	Data prefix:  /work/e658/e658/fb516/SOFTWARE/new/gromacs-2018.6
+;	Working dir:  /fs2/e658/e658/fb516/IAPP/setup/test
+;	Command line:
+;	  gmx_d pdb2gmx -f nosolv_noh_HIS_centered26y1a.pdb -ss -ignh -inter
+;	Force field was read from current directory or a relative path - path added.
+;
+
+; Include forcefield parameters
+#include "./charmm22star.ff/forcefield.itp"
+
+; Include chain topologies
+#include "topol_Protein.itp"
+#include "topol_Protein2.itp"
+#include "topol_Protein3.itp"
+#include "topol_Protein4.itp"
+#include "topol_Protein5.itp"
+#include "topol_Protein6.itp"
+#include "topol_Protein7.itp"
+#include "topol_Protein8.itp"
+#include "topol_Protein9.itp"
+#include "topol_Protein10.itp"
+#include "topol_Protein11.itp"
+#include "topol_Protein12.itp"
+#include "topol_Protein13.itp"
+#include "topol_Protein14.itp"
+#include "topol_Protein15.itp"
+#include "topol_Protein16.itp"
+
+; Include water topology
+#include "./charmm22star.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "./charmm22star.ff/ions.itp"
+
+[ system ]
+; Name
+Protein in water
+
+[ molecules ]
+; Compound        #mols
+Protein             1
+Protein2            1
+Protein3            1
+Protein4            1
+Protein5            1
+Protein6            1
+Protein7            1
+Protein8            1
+Protein9            1
+Protein10           1
+Protein11           1
+Protein12           1
+Protein13           1
+Protein14           1
+Protein15           1
+Protein16           1
+SOL         58291
+CL               48

@@ -1,0 +1,274 @@
+RESTART
+MOLINFO STRUCTURE=structure.pdb
+
+# define all heavy atoms using GROMACS index file
+protein-h: GROUP NDX_FILE=index.ndx NDX_GROUP=Protein-H
+protein: GROUP NDX_FILE=index.ndx NDX_GROUP=Protein
+system: GROUP NDX_FILE=index.ndx NDX_GROUP=System
+
+# make protein whole: add reference position of first heavy atom (in nm)
+WHOLEMOLECULES ENTITY0=1-537 ENTITY1=538-1074 ENTITY2=1075-1611 ENTITY3=1612-2148 ENTITY4=2149-2685 ENTITY5=2686-3222 ENTITY6=3223-3759 ENTITY7=3760-4296 ENTITY8=4297-4833 ENTITY9=4834-5370 ENTITY10=5371-5907 ENTITY11=5908-6444 ENTITY12=6445-6981 ENTITY13=6982-7518 ENTITY14=7519-8055 ENTITY15=8056-8592 ADDREFERENCE REF0=7.977,12.295,6.939 REF1=11.453,6.771,7.163 REF2=7.857,12.19,7.532 REF3=11.438,6.79,7.776 REF4=7.661,12.18,8.36 REF5=11.474,6.687,8.62 REF6=7.569,12.049,8.69   REF7=11.475,6.772,8.977 REF8=7.658,11.999,9.265 REF9=11.274,6.704,9.522  REF10=7.191,11.806,9.51 REF11=11.639,6.928,9.885 REF12=7.515,11.723,10.332 REF13=11.16,6.807,10.622 REF14=7.347,11.62,10.843 REF15=11.207,6.847,11.166
+
+# Constrain the protein CA protofibril core
+RMSD REFERENCE=fibril_core.pdb TYPE=OPTIMAL LABEL=rmsd
+UPPER_WALLS ARG=rmsd AT=0.3 KAPPA=0.0 EXP=3 OFFSET=0 LABEL=rmsdwall 
+
+# Disulfide dihedral (CYS2:CB,CYS2:S,CYS7:S,CYS7:CB)
+disulf1: TORSION ATOMS=29,32,94,91
+disulf2: TORSION ATOMS=1103,1106,1168,1165
+disulf3: TORSION ATOMS=2177,2180,2242,2239
+disulf4: TORSION ATOMS=3251,3254,3316,3313
+disulf5: TORSION ATOMS=4325,4328,4390,4387
+disulf6: TORSION ATOMS=5399,5402,5464,5461
+disulf7: TORSION ATOMS=6473,6476,6538,6535
+disulf8: TORSION ATOMS=7547,7550,7612,7609
+
+ph1: TORSION ATOMS=@phi-223
+ph2: TORSION ATOMS=@phi-224
+ph3: TORSION ATOMS=@phi-225
+ph4: TORSION ATOMS=@phi-226
+ph5: TORSION ATOMS=@phi-227
+ph6: TORSION ATOMS=@phi-228
+ph7: TORSION ATOMS=@phi-229
+ph8: TORSION ATOMS=@phi-230
+ph9: TORSION ATOMS=@phi-231
+ph10: TORSION ATOMS=@phi-232
+ph11: TORSION ATOMS=@phi-233
+ph12: TORSION ATOMS=@phi-234
+
+
+ps1: TORSION ATOMS=@psi-223
+ps2: TORSION ATOMS=@psi-224
+ps3: TORSION ATOMS=@psi-225
+ps4: TORSION ATOMS=@psi-226
+ps5: TORSION ATOMS=@psi-227
+ps6: TORSION ATOMS=@psi-228
+ps7: TORSION ATOMS=@psi-229
+ps8: TORSION ATOMS=@psi-230
+ps9: TORSION ATOMS=@psi-231
+ps10: TORSION ATOMS=@psi-232
+ps11: TORSION ATOMS=@psi-233
+ps12: TORSION ATOMS=@psi-234
+
+
+ph13: TORSION ATOMS=@phi-297
+ph14: TORSION ATOMS=@phi-299
+ph15: TORSION ATOMS=@phi-299
+ph16: TORSION ATOMS=@phi-300
+ph17: TORSION ATOMS=@phi-301
+ph18: TORSION ATOMS=@phi-302
+ph19: TORSION ATOMS=@phi-303
+ph20: TORSION ATOMS=@phi-304
+ph21: TORSION ATOMS=@phi-305
+ph22: TORSION ATOMS=@phi-306
+ph23: TORSION ATOMS=@phi-307
+ph24: TORSION ATOMS=@phi-308
+
+
+ps13: TORSION ATOMS=@psi-297
+ps14: TORSION ATOMS=@psi-299
+ps15: TORSION ATOMS=@psi-299
+ps16: TORSION ATOMS=@psi-300
+ps17: TORSION ATOMS=@psi-301
+ps18: TORSION ATOMS=@psi-302
+ps19: TORSION ATOMS=@psi-303
+ps20: TORSION ATOMS=@psi-304
+ps21: TORSION ATOMS=@psi-305
+ps22: TORSION ATOMS=@psi-306
+ps23: TORSION ATOMS=@psi-307
+ps24: TORSION ATOMS=@psi-308
+
+
+#UNBIASED
+disulf9: TORSION ATOMS=566,569,631,628
+disulf10: TORSION ATOMS=1640,1643,1705,1702
+disulf11: TORSION ATOMS=2714,2717,2779,2776
+disulf12: TORSION ATOMS=3788,3791,3853,3850
+disulf13: TORSION ATOMS=4862,4865,4927,4924
+disulf14: TORSION ATOMS=5936,5939,6001,5998
+disulf15: TORSION ATOMS=7010,7013,7075,7072
+disulf16: TORSION ATOMS=8084,8087,8149,8146
+###############################
+
+# Tail definitions
+tail1: GROUP NDX_FILE=index.ndx NDX_GROUP=tail1
+tail3: GROUP NDX_FILE=index.ndx NDX_GROUP=tail3
+tail5: GROUP NDX_FILE=index.ndx NDX_GROUP=tail5
+tail7: GROUP NDX_FILE=index.ndx NDX_GROUP=tail7
+tail9: GROUP NDX_FILE=index.ndx NDX_GROUP=tail9
+tail11: GROUP NDX_FILE=index.ndx NDX_GROUP=tail11
+tail13: GROUP NDX_FILE=index.ndx NDX_GROUP=tail13
+tail15: GROUP NDX_FILE=index.ndx NDX_GROUP=tail15
+
+
+#UNBIASED Tail definitions
+tail2: GROUP NDX_FILE=index.ndx NDX_GROUP=tail2
+tail4: GROUP NDX_FILE=index.ndx NDX_GROUP=tail4
+tail6: GROUP NDX_FILE=index.ndx NDX_GROUP=tail6
+tail8: GROUP NDX_FILE=index.ndx NDX_GROUP=tail8
+tail10: GROUP NDX_FILE=index.ndx NDX_GROUP=tail10
+tail12: GROUP NDX_FILE=index.ndx NDX_GROUP=tail12
+tail14: GROUP NDX_FILE=index.ndx NDX_GROUP=tail14
+tail16: GROUP NDX_FILE=index.ndx NDX_GROUP=tail16
+
+
+# Inter-tail contacts
+# Theoretical maximum: 3828
+con1: COORDINATION GROUPA=tail1 GROUPB=tail3 R_0=0.8
+con2: COORDINATION GROUPA=tail3 GROUPB=tail5 R_0=0.8
+con3: COORDINATION GROUPA=tail5 GROUPB=tail7 R_0=0.8
+con4: COORDINATION GROUPA=tail7 GROUPB=tail9 R_0=0.8
+con5: COORDINATION GROUPA=tail9 GROUPB=tail11 R_0=0.8
+con6: COORDINATION GROUPA=tail11 GROUPB=tail13 R_0=0.8
+con7: COORDINATION GROUPA=tail13 GROUPB=tail15 R_0=0.8
+
+#UNBIASED
+con8: COORDINATION GROUPA=tail2 GROUPB=tail4 R_0=0.8
+con9: COORDINATION GROUPA=tail4 GROUPB=tail6 R_0=0.8
+con10: COORDINATION GROUPA=tail6 GROUPB=tail8 R_0=0.8
+con11: COORDINATION GROUPA=tail8 GROUPB=tail10 R_0=0.8
+con12: COORDINATION GROUPA=tail10 GROUPB=tail12 R_0=0.8
+con13: COORDINATION GROUPA=tail12 GROUPB=tail14 R_0=0.8
+con14: COORDINATION GROUPA=tail14 GROUPB=tail16 R_0=0.8
+#################
+
+# 1
+com-cys2-1: COM ATOMS=@back-2
+com-cys7-1: COM ATOMS=@back-7
+com-as14-1: COM ATOMS=@back-14
+com-as31-1: COM ATOMS=@back-31
+# 2
+com-cys2-2: COM ATOMS=@back-76
+com-cys7-2: COM ATOMS=@back-81
+com-as14-2: COM ATOMS=@back-88
+com-as31-2: COM ATOMS=@back-105
+# 3
+com-cys2-3: COM ATOMS=@back-150
+com-cys7-3: COM ATOMS=@back-155
+com-as14-3: COM ATOMS=@back-162
+com-as31-3: COM ATOMS=@back-179
+# 4
+com-cys2-4: COM ATOMS=@back-224
+com-cys7-4: COM ATOMS=@back-229
+com-as14-4: COM ATOMS=@back-236
+com-as31-4: COM ATOMS=@back-253
+# 5
+com-cys2-5: COM ATOMS=@back-298
+com-cys7-5: COM ATOMS=@back-303
+com-as14-5: COM ATOMS=@back-310
+com-as31-5: COM ATOMS=@back-327
+# 6
+com-cys2-6: COM ATOMS=@back-372
+com-cys7-6: COM ATOMS=@back-377
+com-as14-6: COM ATOMS=@back-384
+com-as31-6: COM ATOMS=@back-401
+# 7
+com-cys2-7: COM ATOMS=@back-446
+com-cys7-7: COM ATOMS=@back-451
+com-as14-7: COM ATOMS=@back-458
+com-as31-7: COM ATOMS=@back-475
+# 8
+com-cys2-8: COM ATOMS=@back-520
+com-cys7-8: COM ATOMS=@back-525
+com-as14-8: COM ATOMS=@back-532
+com-as31-8: COM ATOMS=@back-549
+
+
+# Tail torsion (CYS2:CA,CYS7:CA,ASN14:CA,ASN31:CA)
+tor1: TORSION ATOMS=com-cys2-1,com-cys7-1,com-as14-1,com-as31-1
+tor2: TORSION ATOMS=com-cys2-2,com-cys7-2,com-as14-2,com-as31-2
+tor3: TORSION ATOMS=com-cys2-3,com-cys7-3,com-as14-3,com-as31-3
+tor4: TORSION ATOMS=com-cys2-4,com-cys7-4,com-as14-4,com-as31-4
+tor5: TORSION ATOMS=com-cys2-5,com-cys7-5,com-as14-5,com-as31-5
+tor6: TORSION ATOMS=com-cys2-6,com-cys7-6,com-as14-6,com-as31-6
+tor7: TORSION ATOMS=com-cys2-7,com-cys7-7,com-as14-7,com-as31-7
+tor8: TORSION ATOMS=com-cys2-8,com-cys7-8,com-as14-8,com-as31-8
+
+#UNBIASED
+# 1
+com-cys2-9: COM ATOMS=@back-39
+com-cys7-9: COM ATOMS=@back-44
+com-as14-9: COM ATOMS=@back-51
+com-as31-9: COM ATOMS=@back-68
+# 2
+com-cys2-10: COM ATOMS=@back-113
+com-cys7-10: COM ATOMS=@back-118
+com-as14-10: COM ATOMS=@back-125
+com-as31-10: COM ATOMS=@back-142
+# 3                          
+com-cys2-11: COM ATOMS=@back-187
+com-cys7-11: COM ATOMS=@back-192
+com-as14-11: COM ATOMS=@back-199
+com-as31-11: COM ATOMS=@back-216
+# 4                          
+com-cys2-12: COM ATOMS=@back-261
+com-cys7-12: COM ATOMS=@back-266
+com-as14-12: COM ATOMS=@back-273
+com-as31-12: COM ATOMS=@back-290
+# 5                          
+com-cys2-13: COM ATOMS=@back-335
+com-cys7-13: COM ATOMS=@back-340
+com-as14-13: COM ATOMS=@back-347
+com-as31-13: COM ATOMS=@back-364
+# 6                          
+com-cys2-14: COM ATOMS=@back-409
+com-cys7-14: COM ATOMS=@back-414
+com-as14-14: COM ATOMS=@back-421
+com-as31-14: COM ATOMS=@back-438
+# 7                          
+com-cys2-15: COM ATOMS=@back-483
+com-cys7-15: COM ATOMS=@back-488
+com-as14-15: COM ATOMS=@back-495
+com-as31-15: COM ATOMS=@back-512
+# 8                          
+com-cys2-16: COM ATOMS=@back-557
+com-cys7-16: COM ATOMS=@back-562
+com-as14-16: COM ATOMS=@back-569
+com-as31-16: COM ATOMS=@back-586
+
+# Tail torsion (CYS2:CA,CYS7:CA,ASN14:CA,ASN31:CA)
+tor9: TORSION ATOMS=com-cys2-9,com-cys7-9,com-as14-9,com-as31-9
+tor10: TORSION ATOMS=com-cys2-10,com-cys7-10,com-as14-10,com-as31-10
+tor11: TORSION ATOMS=com-cys2-11,com-cys7-11,com-as14-11,com-as31-11
+tor12: TORSION ATOMS=com-cys2-12,com-cys7-12,com-as14-12,com-as31-12
+tor13: TORSION ATOMS=com-cys2-13,com-cys7-13,com-as14-13,com-as31-13
+tor14: TORSION ATOMS=com-cys2-14,com-cys7-14,com-as14-14,com-as31-14
+tor15: TORSION ATOMS=com-cys2-15,com-cys7-15,com-as14-15,com-as31-15
+tor16: TORSION ATOMS=com-cys2-16,com-cys7-16,com-as14-16,com-as31-16
+####################
+
+PBMETAD ...
+    # Carlo's Biasfactor rule-of-thumb: 10 * sqrt(number of CVs)
+    BIASFACTOR=56 HEIGHT=0.3 PACE=500000000 WALKERS_MPI LABEL=pb GRID_WSTRIDE=10000 SIGMA=1000 ADAPTIVE=DIFF
+    ARG=disulf1,disulf2,disulf3,disulf4,disulf5,disulf6,disulf7,disulf8,tor1,tor2,tor3,tor4,tor5,tor6,tor7,tor8,con1,con2,con3,con4,con5,con6,con7
+    SIGMA_MIN=0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.5,0.5,0.5,0.5,0.5,0.5,0.5
+    SIGMA_MAX=0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,20,20,20,20,20,20,20
+    GRID_MIN=-pi,-pi,-pi,-pi,-pi,-pi,-pi,-pi,-pi,-pi,-pi,-pi,-pi,-pi,-pi,-pi,0,0,0,0,0,0,0
+    GRID_MAX=pi,pi,pi,pi,pi,pi,pi,pi,pi,pi,pi,pi,pi,pi,pi,pi,3820,3820,3820,3820,3820,3820,3820
+    FILE=thomas_marco/HILLS_disulf1,thomas_marco/HILLS_disulf2,thomas_marco/HILLS_disulf3,thomas_marco/HILLS_disulf4,thomas_marco/HILLS_disulf5,thomas_marco/HILLS_disulf6,thomas_marco/HILLS_disulf7,thomas_marco/HILLS_disulf8,thomas_marco/HILLS_tor1,thomas_marco/HILLS_tor2,thomas_marco/HILLS_tor3,thomas_marco/HILLS_tor4,thomas_marco/HILLS_tor5,thomas_marco/HILLS_tor6,thomas_marco/HILLS_tor7,thomas_marco/HILLS_tor8,thomas_marco/HILLS_con1,thomas_marco/HILLS_con2,thomas_marco/HILLS_con3,thomas_marco/HILLS_con4,thomas_marco/HILLS_con5,thomas_marco/HILLS_con6,thomas_marco/HILLS_con7
+    GRID_RFILES=thomas_marco/GRID_disulf1,thomas_marco/GRID_disulf2,thomas_marco/GRID_disulf3,thomas_marco/GRID_disulf4,thomas_marco/GRID_disulf5,thomas_marco/GRID_disulf6,thomas_marco/GRID_disulf7,thomas_marco/GRID_disulf8,thomas_marco/GRID_tor1,thomas_marco/GRID_tor2,thomas_marco/GRID_tor3,thomas_marco/GRID_tor4,thomas_marco/GRID_tor5,thomas_marco/GRID_tor6,thomas_marco/GRID_tor7,thomas_marco/GRID_tor8,thomas_marco/GRID_con1,thomas_marco/GRID_con2,thomas_marco/GRID_con3,thomas_marco/GRID_con4,thomas_marco/GRID_con5,thomas_marco/GRID_con6,thomas_marco/GRID_con7
+    GRID_WFILES=thomas_marco/GRID_disulf1,thomas_marco/GRID_disulf2,thomas_marco/GRID_disulf3,thomas_marco/GRID_disulf4,thomas_marco/GRID_disulf5,thomas_marco/GRID_disulf6,thomas_marco/GRID_disulf7,thomas_marco/GRID_disulf8,thomas_marco/GRID_tor1,thomas_marco/GRID_tor2,thomas_marco/GRID_tor3,thomas_marco/GRID_tor4,thomas_marco/GRID_tor5,thomas_marco/GRID_tor6,thomas_marco/GRID_tor7,thomas_marco/GRID_tor8,thomas_marco/GRID_con1,thomas_marco/GRID_con2,thomas_marco/GRID_con3,thomas_marco/GRID_con4,thomas_marco/GRID_con5,thomas_marco/GRID_con6,thomas_marco/GRID_con7
+    TEMP=310
+...
+
+#EMMI ...
+#    ARG=pb.bias REWEIGHT
+#    LABEL=gmm NOPBC TEMP=310.0 NL_STRIDE=100 NL_CUTOFF=0.01
+#    ATOMS=protein-h GMM_FILE=../iapp.dat
+#    # the larger the number the softer the contribution of the EM data
+#    SIGMA0=5.0 SIGMA_MIN=0.05 DSIGMA=0.1 RESOLUTION=0.1 NOISETYPE=GAUSS
+#    OPTSIGMAMEAN SIGMA_MEAN0=2.0
+#    AVERAGING=200 WRITE_STRIDE=10000
+#...
+
+# translate into bias
+#emr: BIASVALUE ARG=gmm.scoreb STRIDE=2
+
+# print useful info to file
+#PRINT ARG=gmm.* FILE=EMMI STRIDE=500
+
+#PRINT ARG=pb.bias FILE=FULLBIAS
+#PRINT ARG=disulf1,disulf2,disulf3,disulf4,disulf5,disulf6,disulf7,disulf8,tor1,tor2,tor3,tor4,tor5,tor6,tor7,tor8,con1,con2,con3,con4,con5,con6,con7,pb.bias FILE=COLVAR STRIDE=1
+#PRINT ARG=disulf9,disulf10,disulf11,disulf12,disulf13,disulf14,disulf15,disulf16,tor9,tor10,tor11,tor12,tor13,tor14,tor15,tor16,con8,con9,con10,con11,con12,con13,con14 FILE=COLVAR_UNBIASED STRIDE=1
+
+PRINT ARG=disulf1,disulf2,disulf3,disulf4,disulf5,disulf6,disulf7,disulf8,tor1,tor2,tor3,tor4,tor5,tor6,tor7,tor8,con1,con2,con3,con4,con5,con6,con7,pb.bias,ph1,ph2,ph3,ph4,ph5,ph6,ph7,ph8,ph9,ph10,ph11,ph12,ph13,ph14,ph15,ph16,ph17,ph18,ph19,ph20,ph21,ph22,ph23,ph24,ps1,ps2,ps3,ps4,ps5,ps6,ps7,ps8,ps9,ps10,ps11,ps12,ps13,ps14,ps15,ps16,ps17,ps18,ps19,ps20,ps21,ps22,ps23,ps24 FILE=COLVAR_r3r4 STRIDE=1
